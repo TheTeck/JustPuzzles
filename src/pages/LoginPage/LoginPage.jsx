@@ -33,7 +33,7 @@ export default function LoginPage(props){
           await adminService.login(state);
           // Route to wherever you want!
           props.handleSignUpOrLogin()
-          history.push('/')
+          history.push('/admin')
           
         } catch (err) {
           // Invalid user data (probably duplicate email)
