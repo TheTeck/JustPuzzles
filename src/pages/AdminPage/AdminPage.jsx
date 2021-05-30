@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Segment } from 'semantic-ui-react'
+import * as puzzleService from '../../utils/puzzleService'
 import './AdminPage.css'
 
 export default function AdminPage ({ admin, handleLogout }) {
@@ -118,25 +119,23 @@ export default function AdminPage ({ admin, handleLogout }) {
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log('is handlesUbmit being called?')
     
-        // Why do we need to create FormData
-        // what type of request are we making?
         const formData = new FormData()
+
         formData.append('photo', selectedFile)
         formData.append('width', state.width)
         formData.append('height', state.height)
+        formData.append('month', state.month)
+        formData.append('day', state.day)
+        formData.append('year', state.year)
         
-        // Have to submit the form now! We need a function!
         handleAddPuzzle(formData)
     }
 
-    async function handleAddPuzzle(post){
-        console.log('handle add Post')
+    async function handleAddPuzzle(puzzle){
         try {
-            
-            //const data = await postService.create(post)
-    
+            const data = await puzzleService.create(puzzle)
+            console.log(data)    
         } catch(err){
             console.log(err)
         }
@@ -144,7 +143,7 @@ export default function AdminPage ({ admin, handleLogout }) {
 
     return (
         <div id="admin-container">
-            <div onClick={handleLogoutClick}>Log Out</div>
+            <div onClick={handleLogoutClick} id="logout-btn">Log Out</div>
             <Grid id="form-container" textAlign='left' verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Segment>

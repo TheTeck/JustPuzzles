@@ -10,3 +10,23 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+#logout-btn {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    color: white;
+    font-weight: 600;
+    background-color: rgb(219, 5, 5);
+    border: 2px solid rgba(255, 0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 250ms ease-in;
+}
+
+#logout-btn:hover {
+    border: 2px solid rgb(219, 5, 5);
+    background-color: white;
+    color: rgb(219, 5, 5);
+}

@@ -28,11 +28,11 @@ function create(req, res){
 
         s3.upload(params, async function(err, data) {
             const puzzle = await Puzzle.create({
-                width: req.body.width,
-                height: req.body.height,
-                month: req.body.month,
-                day: req.body.day,
-                year: req.body.year, 
+                width: +req.body.width,
+                height: +req.body.height,
+                month: +req.body.month,
+                day: +req.body.day,
+                year: +req.body.year, 
                 photoUrl: data.Location
             })
             res.status(201).json({ puzzle })
