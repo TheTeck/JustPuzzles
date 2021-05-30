@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import LoginPage from '../LoginPage/LoginPage';
+import LoginPage from '../LoginPage/LoginPage'
 import AdminPage from '../AdminPage/AdminPage'
+import HomePage from '../HomePage/HomePage'
 import adminService from '../../utils/adminService'
 
 
@@ -28,7 +29,7 @@ function App() {
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
           </Route>
           <Route exact path="/">
-              Homepage
+              <HomePage pageNum={1} />
           </Route>
           {adminService.getUser() ? 
             <> 

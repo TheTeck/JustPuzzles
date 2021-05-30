@@ -14,17 +14,13 @@ export function create(data){
 
 export function getAll() {
   return fetch(BASE_URL, {
-        headers: {
-            'Authorization': 'Bearer ' + tokenService.getToken()
-        }
-    }).then(res => res.json())
+        method: 'GET'
+  }).then(res => res.json())
 }
 
 export function getOne(puzzleID) {
     return fetch(`${BASE_URL}/${puzzleID}`, {
-        headers: {
-            'Authorization': 'Bearer ' + tokenService.getToken()
-        }
+        method: 'GET'
     }).then(res => res.json())
 }
 
