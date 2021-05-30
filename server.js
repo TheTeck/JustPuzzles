@@ -22,8 +22,8 @@ app.use(express.static(path.join(__dirname, 'build'))); // this allows express t
 // the user information to req.user
 app.use(require('./config/auth')); 
 // api routes must be before the "catch all" route
-app.use('/api/users', require('./routes/api/users'));
 app.use('/api/admin', require('./routes/api/admin'))
+app.use('/api/puzzles', require('./routes/api/puzzles'))
 
 // "catch all" route
 app.get('/*', function(req, res) {
