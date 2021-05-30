@@ -1,0 +1,10 @@
+#feed-container {
+    width: 100%;
+}
+
+@media screen and (min-width: 650px) {
+    #feed-container {
+        width: 70%;
+        margin: 0 auto;
+    }
+}

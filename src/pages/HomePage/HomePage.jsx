@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
+import Feed from '../../components/Feed/Feed'
 import * as puzzleService from '../../utils/puzzleService'
 import './HomePage.css'
 
@@ -11,7 +12,6 @@ export default function HomePage ({ pageNum }) {
     async function getPuzzles(pageNum) {
         try {
             const data = await puzzleService.getAll();
-            console.log(data)
             const onePageOfPuzzles = data.puzzles.slice(10*(page-1), 10*page)
             setPuzzles([...onePageOfPuzzles])
         } catch(err){
@@ -26,6 +26,7 @@ export default function HomePage ({ pageNum }) {
     return (
         <div id="home-container">
             <Header />
+            <Feed puzzles={puzzles} />
         </div>
     )
 }

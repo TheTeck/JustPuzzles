@@ -45,7 +45,7 @@ function create(req, res){
 
 async function index(req, res){
     try {
-        const puzzles = await Puzzle.find({})
+        const puzzles = await Puzzle.find({}).sort({ year: 1, month: 1, day: 1 })
         res.status(200).json({ puzzles })
     } catch(err){
         res.json(err)
