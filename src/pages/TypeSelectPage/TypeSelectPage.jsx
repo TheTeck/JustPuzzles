@@ -21,11 +21,21 @@ export default function TypeSelectPage () {
     }
 
     function handleSubmitClick () {
+
+        const sizeConversion = {
+            '126': 70,
+            '150': 65,
+            '176': 60,
+            '216': 55,
+            '260': 50,
+            '308': 45,
+        }
+
         history.push({
             pathname: `/puzzle/${id}`,
             state: {
                 type,
-                count
+                size: sizeConversion['' + count]
             }
         })
     }
