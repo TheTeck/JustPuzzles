@@ -1,7 +1,4 @@
 .tile-piece {
     position: absolute;
-}
-
-.tile-piece:hover {
-    box-shadow: inset 0 0 15px red;
+    cursor: pointer;
 }

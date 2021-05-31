@@ -19,9 +19,9 @@ export default function PlayPage () {
     const [ puzzleDone, setPuzzleDone ] = useState(false)
     
     const { id } = useParams()
+      
     
-    
-    const snap = new Audio('snap.mp3')
+    const snap = new Audio('/snap.mp3')
 
     // Add all connected pieces to each other's connected array property
     function bindPieces (piece, otherPiece) {
@@ -36,6 +36,7 @@ export default function PlayPage () {
         thePuzzle[otherPiece].connected.forEach(connectedPiece => {
             temp[connectedPiece].connected = [...allUniqueConnected]
         })
+
         snap.play()
         setThePuzzle(temp)
     }

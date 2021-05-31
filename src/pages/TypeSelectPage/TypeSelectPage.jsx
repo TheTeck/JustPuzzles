@@ -6,11 +6,11 @@ import './TypeSelectPage.css';
 export default function TypeSelectPage () {
 
     const [type, setType] = useState('tile')
-    const [count, setCount] = useState(126)
+    const [count, setCount] = useState(150)
     const { id } = useParams()
     const history = useHistory()
 
-    const sizeSelection = [ 126, 150, 176, 216, 260, 308 ]
+    const sizeSelection = [ 77, 96, 104, 126, 150, 176, 216, 260, 308 ]
 
     function handleTileClick() {
         setType('tile')
@@ -23,6 +23,9 @@ export default function TypeSelectPage () {
     function handleSubmitClick () {
 
         const sizeConversion = {
+            '77': 85,
+            '96': 80,
+            '104': 75,
             '126': 70,
             '150': 65,
             '176': 60,
