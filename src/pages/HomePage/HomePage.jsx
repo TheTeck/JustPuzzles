@@ -13,7 +13,7 @@ export default function HomePage ({ pageNum }) {
     const history = useHistory()
 
     function showPuzzle (id) {
-        history.push(`/puzzle/${id}`)
+        history.push(`/puzzle/${id}/options`)
     }
 
     async function getPuzzles(pageNum) {

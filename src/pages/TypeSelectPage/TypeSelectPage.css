@@ -26,7 +26,7 @@
     white-space: nowrap;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -200%);
+    transform: translate(-50%, -250%);
 }
 
 .piece-selection {
@@ -49,6 +49,7 @@
     margin-top: 3px;
     font-size: 1.2em;
     font-weight: 600;
+    pointer-events: none;
 }
 
 #tile1, #tile2, #tile3, #tile4 {
@@ -63,11 +64,13 @@
 .tileRed {
     border: 3px solid rgb(218, 90, 5);
     background-color: rgb(215, 118, 54);
+    pointer-events: none;
 }
 
 .tileBlack {
     border: 3px solid black;
     background-color: rgb(57, 56, 56);
+    pointer-events: none;
 }
 
 #tile1 {
@@ -94,13 +97,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
+    margin-top: 40px;
 }
 
 .sizes {
     font-size: 1.5em;
+    font-weight: 600;
     padding: 10px 20px;
     cursor: pointer;
+    color: black;
+}
+
+.sizes span {
+    color: red;
 }
 
 .sizes:hover {
