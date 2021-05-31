@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from '../LoginPage/LoginPage'
 import AdminPage from '../AdminPage/AdminPage'
 import HomePage from '../HomePage/HomePage'
+import TypeSelectPage from '../TypeSelectPage/TypeSelectPage'
 import adminService from '../../utils/adminService'
 
 
@@ -27,6 +28,9 @@ function App() {
       <Switch>
           <Route exact path="/login">
              <LoginPage handleSignUpOrLogin={handleSignUpOrLogin}/>
+          </Route>
+          <Route exact path="/puzzle/:id">
+            <TypeSelectPage />
           </Route>
           <Route exact path="/">
               <HomePage pageNum={1} />

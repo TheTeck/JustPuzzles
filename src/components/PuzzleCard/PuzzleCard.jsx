@@ -1,7 +1,7 @@
 import React from 'react'
 import './PuzzleCard.css'
 
-export default function PuzzleCard ({ puzzle }) {
+export default function PuzzleCard ({ puzzle, showPuzzle }) {
 
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -9,7 +9,7 @@ export default function PuzzleCard ({ puzzle }) {
     ]
 
     function handlePlayClick () {
-        //Do something here
+        showPuzzle(puzzle._id)
     }
 
     return (

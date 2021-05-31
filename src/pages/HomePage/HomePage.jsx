@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import Feed from '../../components/Feed/Feed'
 import * as puzzleService from '../../utils/puzzleService'
@@ -8,6 +9,12 @@ export default function HomePage ({ pageNum }) {
 
     const [puzzles, setPuzzles] = useState([])
     const [page, setPage] = useState(pageNum)
+
+    const history = useHistory()
+
+    function showPuzzle (id) {
+        history.push(`/puzzle/${id}`)
+    }
 
     async function getPuzzles(pageNum) {
         try {
@@ -26,7 +33,7 @@ export default function HomePage ({ pageNum }) {
     return (
         <div id="home-container">
             <Header />
-            <Feed puzzles={puzzles} />
+            <Feed puzzles={puzzles} showPuzzle={showPuzzle} />
         </div>
     )
 }
