@@ -4,3 +4,28 @@
     height: 100%;
     background-color: rgb(113, 216, 216);
 }
+
+.puzzle-done {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.481);
+    z-index: 5;
+}
+
+#clock {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-weight: 500;
+    font-size: 1.2em;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.563);
+    color: white;
+    width: 100px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}

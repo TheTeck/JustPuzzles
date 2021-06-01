@@ -19,6 +19,7 @@ export default function PlayPage () {
     const [ puzzleDone, setPuzzleDone ] = useState(false)
     
     const { id } = useParams()
+    let interval = null
       
     
     const snap = new Audio('/snap.mp3')
@@ -28,11 +29,13 @@ export default function PlayPage () {
         const allConnected = [ ...thePuzzle[piece].connected, ...thePuzzle[otherPiece].connected ]
         const allUniqueConnected = [...new Set(allConnected)]
         const temp = thePuzzle
+
         thePuzzle[piece].connected.forEach(connectedPiece => {
             temp[connectedPiece].connected = [...allUniqueConnected]
             temp[connectedPiece].xLoc = thePuzzle[otherPiece].xLoc + (thePuzzle[connectedPiece].x - thePuzzle[otherPiece].x) * pieceSize
             temp[connectedPiece].yLoc = thePuzzle[otherPiece].yLoc + (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize
         })
+
         thePuzzle[otherPiece].connected.forEach(connectedPiece => {
             temp[connectedPiece].connected = [...allUniqueConnected]
         })
@@ -103,6 +106,7 @@ export default function PlayPage () {
             setCurrentActive(null)
             if (temp[currentActive].connected.length === thePuzzle.length) {
                 setPuzzleDone(true)
+                console.log("puzzle is complete")
             }
         } else {
             if (e.target.id >= 0 && e.target.id < yCount * xCount)
@@ -167,7 +171,6 @@ export default function PlayPage () {
         setupPuzzle()
     }, [])
 
-    console.log(thePuzzle)
     return (
         <>
             <div id="puzzle-container" onClick={setActive} onMouseMove={movePiece} >
@@ -186,7 +189,10 @@ export default function PlayPage () {
                 }
             </div>
             {
-                puzzleDone ? <p>Puzzle is complete!</p> : ''
+                puzzleDone ? 
+                    <div className="puzzle-done">
+                        Congratulations! Puzzle Completed!
+                    </div> : ''
             }
         </>
     )
