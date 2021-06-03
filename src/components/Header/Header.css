@@ -4,6 +4,7 @@
     border: 3px solid rgb(218, 90, 5);
     box-shadow: 0 0 4px black, inset 0 0 2px black;
     position: relative;
+    pointer-events: none;
 }
 
 #header-title {

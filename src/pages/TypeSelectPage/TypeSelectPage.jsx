@@ -12,8 +12,8 @@ export default function TypeSelectPage () {
 
     const sizeSelection = [ 6, 77, 96, 104, 126, 150, 176, 216, 260, 308 ]
 
-    function handleTileClick() {
-        setType('tile')
+    function handleTileClick(e) {
+        setType(e.target.getAttribute('name'))
     }
 
     function handleSizeClick(e) {
@@ -53,27 +53,39 @@ export default function TypeSelectPage () {
             <div id="all-selections-container">
                 <div id="selections-container">
                     <div id="selections-title">Select your puzzle piece type</div>
-                    <div className="piece-selection" onClick={handleTileClick} name="tile">
+                        <div className="piece-selection" onClick={handleTileClick} name="tile">
+                            <div className="piece-selection-name">Tiles</div>
+                            {
+                                type === 'tile' ? 
+                                <>
+                                    <div className='tileRed' id="tile1"></div>
+                                    <div className='tileRed' id="tile2"></div>
+                                    <div className='tileRed' id="tile3"></div>
+                                    <div className='tileRed' id="tile4"></div>
+                                </> :
+                                <>
+                                    <div className='tileBlack' id="tile1"></div>
+                                    <div className='tileBlack' id="tile2"></div>
+                                    <div className='tileBlack' id="tile3"></div>
+                                    <div className='tileBlack' id="tile4"></div>
+                                </>
+                            }
+                        </div>
 
-                        <div className="piece-selection-name">Tiles</div>
-                        {
-                            type === 'tile' ? 
-                            <>
-                                <div className='tileRed' id="tile1"></div>
-                                <div className='tileRed' id="tile2"></div>
-                                <div className='tileRed' id="tile3"></div>
-                                <div className='tileRed' id="tile4"></div>
-                            </> :
-                            <>
-                                <div className='tileBlack' id="tile1"></div>
-                                <div className='tileBlack' id="tile2"></div>
-                                <div className='tileBlack' id="tile3"></div>
-                                <div className='tileBlack' id="tile4"></div>
-                            </>
-                        }
-
+                        <div className="piece-selection" onClick={handleTileClick} name="poly">
+                            <div className="piece-selection-name">Polygons</div>
+                            {
+                                type === 'poly' ? 
+                                <div id='polyOut' style={{ backgroundColor: 'rgb(218, 90, 5)'}} >
+                                    <div id='polyIn' style={{ backgroundColor: 'rgb(215, 118, 54)'}} ></div>
+                                </div>
+                                :
+                                <div id='polyOut' style={{ backgroundColor: 'black'}} >
+                                    <div id='polyIn' style={{ backgroundColor: 'rgb(57, 56, 56)'}} ></div>
+                                </div>
+                            }
+                        </div>
                     </div>
-                </div>
                 <div id="sizes-container">
                     <div id="selections-title">Select your piece count</div>
                     {
