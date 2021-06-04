@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useParams} from 'react-router-dom'
 import TilePiece from '../../components/TilePiece/TilePiece'
+import PolyPiece from '../../components/PolyPiece/PolyPiece'
 import * as puzzleService from '../../utils/puzzleService'
 import './PlayPage.css'
 
@@ -17,6 +18,7 @@ export default function PlayPage () {
     const [ thePuzzle, setThePuzzle ] = useState([])
     const [ force, setForce ] = useState(false)
     const [ puzzleDone, setPuzzleDone ] = useState(false)
+    const [ buffer, setBuffer ] = useState(0)
     
     const { id } = useParams()
     let interval = null
@@ -33,7 +35,8 @@ export default function PlayPage () {
         thePuzzle[piece].connected.forEach(connectedPiece => {
             temp[connectedPiece].connected = [...allUniqueConnected]
             temp[connectedPiece].xLoc = thePuzzle[otherPiece].xLoc + (thePuzzle[connectedPiece].x - thePuzzle[otherPiece].x) * pieceSize
-            temp[connectedPiece].yLoc = thePuzzle[otherPiece].yLoc + (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize
+            temp[connectedPiece].yLoc = thePuzzle[otherPiece].yLoc + 
+                (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize
         })
 
         thePuzzle[otherPiece].connected.forEach(connectedPiece => {
@@ -54,7 +57,7 @@ export default function PlayPage () {
             if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize)) < 15
                 && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < 15) {
                 outputX = thePuzzle[piece-xCount].xLoc
-                outputY = thePuzzle[piece-xCount].yLoc + pieceSize
+                outputY = thePuzzle[piece-xCount].yLoc + pieceSize - (piece-xCount < xCount ? buffer : 0)
                 bindPieces(piece, piece-xCount)
                 return [ outputX, outputY ]
             }
@@ -63,7 +66,8 @@ export default function PlayPage () {
         if (thePuzzle[piece].x !== 0 && !thePuzzle[piece].connected.includes(piece - 1)) {
             if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize)) < 15
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < 15) {
-                outputX = thePuzzle[piece-1].xLoc + pieceSize
+                outputX = thePuzzle[piece-1].xLoc + pieceSize - (!(piece-1 % xCount) ? buffer : 0)
+                console.log(piece-1 % xCount, piece - 1, xCount)
                 outputY = thePuzzle[piece-1].yLoc
                 bindPieces(piece, piece-1)
                 return [ outputX, outputY ]
@@ -117,12 +121,12 @@ export default function PlayPage () {
     function movePiece(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
-            temp[currentActive].z = 2
             temp[currentActive].xLoc = updatePieceXLocation(e.clientX, currentActive)
             temp[currentActive].yLoc = updatePieceYLocation(e.clientY, currentActive)
             for (let connection of temp[currentActive].connected) {
                 temp[connection].xLoc = updatePieceXLocation(e.clientX, connection)
                 temp[connection].yLoc = updatePieceYLocation(e.clientY, connection)
+                temp[connection].z = 3
             }
             setThePuzzle(temp)
             setForce(!force)
@@ -147,8 +151,15 @@ export default function PlayPage () {
             setYCount(ySize)
             
             const temp = []
-            for(let y = 0; y < ySize; y++) {
+            for(let y = 0; y < ySize; y++) {          
                 for (let x = 0; x < xSize; x++) {
+
+                    let description = ''
+                    if (y === 0) description += 'top'
+                    else if (y === ySize - 1) description += 'bottom'
+                    if (x === 0) description += 'left'
+                    else if (x === xSize - 1) description += 'right'
+
                     temp.push(
                         {
                             x: x,
@@ -156,11 +167,18 @@ export default function PlayPage () {
                             z: 1,
                             xLoc: Math.floor(Math.random() * (window.innerWidth - pieceSize)),
                             yLoc: Math.floor(Math.random() * (window.innerHeight - pieceSize)),
+                            description: description,
                             connected: [ xSize * y + x]
                         }
                     )
                 }
             }
+
+            if (type === 'tile')
+                setBuffer(0)
+            if (type === 'poly')
+                setBuffer(pieceSize / 70 * 15)
+
             setThePuzzle(temp)
         } catch (err) {
             console.log(err)
@@ -177,15 +195,28 @@ export default function PlayPage () {
                 {
                     thePuzzle.map((piece, index) => {
                         return (
-                            <TilePiece 
-                                key={index}
-                                piece={piece}
-                                image={puzzle.photoUrl}
-                                id={index}
-                                size={pieceSize}
-                            />
+                            <>
+                                {
+                                    type === 'tile' ?
+                                        <TilePiece 
+                                            key={index}
+                                            piece={piece}
+                                            image={puzzle.photoUrl}
+                                            id={index}
+                                            size={pieceSize}
+                                        />
+                                    :
+                                        <PolyPiece 
+                                            key={index}
+                                            piece={piece}
+                                            image={puzzle.photoUrl}
+                                            id={index}
+                                            size={pieceSize}
+                                        />
+                                }
+                            </>
                         )
-                    })
+                    }) 
                 }
             </div>
             {
