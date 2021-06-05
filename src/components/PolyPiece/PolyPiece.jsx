@@ -52,6 +52,10 @@ export default function PolyPiece ({ image, size, id, piece }) {
                 fontSize: '20px',
                 color: 'white'
             }}
-            >{piece.x}, {piece.y}</div>
+            >
+                <div className="red-box" style={{ width: size, height: size, left: xOffset, top: yOffset }}>
+                    {piece.x}, {piece.y}
+                </div>
+            </div>
     )
 } 
