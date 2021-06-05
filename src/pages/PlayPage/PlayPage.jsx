@@ -54,20 +54,21 @@ export default function PlayPage () {
 
         // Check if piece above active piece is in range and snap to it
         if (thePuzzle[piece].y !== 0 && !thePuzzle[piece].connected.includes(piece - xCount)) {
-            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize)) < 15
+            const offset = piece-xCount < xCount ? buffer : 0
+            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize - offset)) < 15
                 && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < 15) {
                 outputX = thePuzzle[piece-xCount].xLoc
-                outputY = thePuzzle[piece-xCount].yLoc + pieceSize - (piece-xCount < xCount ? buffer : 0)
+                outputY = thePuzzle[piece-xCount].yLoc + pieceSize - offset
                 bindPieces(piece, piece-xCount)
                 return [ outputX, outputY ]
             }
         }
         // Check if piece to the left of the active piece is in range and snap to it
         if (thePuzzle[piece].x !== 0 && !thePuzzle[piece].connected.includes(piece - 1)) {
-            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize)) < 15
+            const offset = piece - 1 % xCount ? 0 : buffer
+            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize - offset)) < 15
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < 15) {
-                outputX = thePuzzle[piece-1].xLoc + pieceSize - (!(piece-1 % xCount) ? buffer : 0)
-                console.log(piece-1 % xCount, piece - 1, xCount)
+                outputX = thePuzzle[piece-1].xLoc + pieceSize - offset
                 outputY = thePuzzle[piece-1].yLoc
                 bindPieces(piece, piece-1)
                 return [ outputX, outputY ]
@@ -75,19 +76,21 @@ export default function PlayPage () {
         }
         // Check if piece below active piece is in range and snap to it
         if (thePuzzle[piece].y !== yCount-1 && !thePuzzle[piece].connected.includes(piece + xCount)) {
-            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+xCount].yLoc - pieceSize)) < 15
+            const offset = piece < xCount ? buffer : 0
+            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+xCount].yLoc - pieceSize + offset)) < 15
                 && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+xCount].xLoc)) < 15) {
                 outputX = thePuzzle[piece+xCount].xLoc
-                outputY = thePuzzle[piece+xCount].yLoc - pieceSize
+                outputY = thePuzzle[piece+xCount].yLoc - pieceSize + offset
                 bindPieces(piece, piece+xCount)
                 return [ outputX, outputY ]
             }
         }
         // Check if piece to the right of the active piece is in range and snap to it
         if (thePuzzle[piece].x !== xCount-1 && !thePuzzle[piece].connected.includes(piece + 1)) {
-            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+1].xLoc - pieceSize)) < 15
+            const offset = piece % xCount ? 0 : buffer
+            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+1].xLoc - pieceSize + offset)) < 15
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+1].yLoc)) < 15) {
-                outputX = thePuzzle[piece+1].xLoc - pieceSize
+                outputX = thePuzzle[piece+1].xLoc - pieceSize + offset
                 outputY = thePuzzle[piece+1].yLoc
                 bindPieces(piece, piece+1)
                 return [ outputX, outputY ]
@@ -134,11 +137,13 @@ export default function PlayPage () {
     }
 
     function updatePieceXLocation(mouseX, piece) {
-        return (thePuzzle[piece].x - thePuzzle[currentActive].x) * pieceSize + mouseX - pieceSize / 2
+        const offset = thePuzzle[piece].x === 0 ? buffer : 0
+        return (thePuzzle[piece].x - thePuzzle[currentActive].x) * pieceSize + mouseX - pieceSize / 2 + offset
     }
 
     function updatePieceYLocation(mouseY, piece) {
-        return (thePuzzle[piece].y - thePuzzle[currentActive].y) * pieceSize + mouseY - pieceSize / 2
+        const offset = thePuzzle[piece].y === 0 ? buffer : 0
+        return (thePuzzle[piece].y - thePuzzle[currentActive].y) * pieceSize + mouseY - pieceSize / 2 + offset
     }
     
     async function setupPuzzle () {
