@@ -16,6 +16,8 @@ export default function PlayPage () {
     const [ yCount, setYCount ] = useState()
     const [ currentActive, setCurrentActive ] = useState(null)
     const [ thePuzzle, setThePuzzle ] = useState([])
+    const [ vEdges, setVEdges ] = useState([])
+    const [ hEdges, setHEdges ] = useState([])
     const [ force, setForce ] = useState(false)
     const [ puzzleDone, setPuzzleDone ] = useState(false)
     const [ buffer, setBuffer ] = useState(0)
@@ -156,7 +158,11 @@ export default function PlayPage () {
             setYCount(ySize)
             
             const temp = []
-            for(let y = 0; y < ySize; y++) {          
+            const vEdgeBuilder = []
+            const hEdgeBuilder = []
+            for(let y = 0; y < ySize; y++) {         
+                vEdgeBuilder.push([])
+                hEdgeBuilder.push([]) 
                 for (let x = 0; x < xSize; x++) {
 
                     let description = ''
@@ -176,8 +182,19 @@ export default function PlayPage () {
                             connected: [ xSize * y + x]
                         }
                     )
+
+                    // Establish edges in-between polygon pieces
+                    if (type === 'poly' && x !== xSize - 1) {
+                        vEdgeBuilder[y].push([Math.floor(Math.random() * 30) - 15, Math.floor(Math.random() * 40) + 30])
+                    }
+                    if (type === 'poly' && y !== ySize - 1) {
+                        hEdgeBuilder[y].push([Math.floor(Math.random() * 30) - 15, Math.floor(Math.random() * 40) + 30])
+                    }
                 }
             }
+
+            setVEdges(vEdgeBuilder)
+            setHEdges(hEdgeBuilder)
 
             if (type === 'tile')
                 setBuffer(0)
@@ -217,6 +234,10 @@ export default function PlayPage () {
                                             image={puzzle.photoUrl}
                                             id={index}
                                             size={pieceSize}
+                                            vEdges={vEdges}
+                                            hEdges={hEdges}
+                                            xCount={xCount}
+                                            yCount={yCount}
                                         />
                                 }
                             </>
