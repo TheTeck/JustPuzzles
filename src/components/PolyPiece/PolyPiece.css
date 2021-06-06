@@ -2,9 +2,3 @@
     position: absolute;
     cursor: pointer;
 }
-
-.red-box {
-    border: 1px solid red;
-    position: absolute;
-    pointer-events: none;
-}
