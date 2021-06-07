@@ -62,7 +62,7 @@ export default function HomePage ({ pageNum }) {
                 {page} of {totalPages} Pages
                 <div onClick={handleRightClick} className="right-arrow"></div>
             </div>
-            <Feed puzzles={pagePuzzles} showPuzzle={showPuzzle} />
+            <Feed puzzles={pagePuzzles} showPuzzle={showPuzzle} firstPage={page === 1 ? true : false}/>
         </div>
     )
 }

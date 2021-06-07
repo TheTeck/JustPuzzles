@@ -1,7 +1,7 @@
 import React from 'react'
 import './PuzzleCard.css'
 
-export default function PuzzleCard ({ puzzle, showPuzzle }) {
+export default function PuzzleCard ({ puzzle, showPuzzle, index, firstPage }) {
 
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -14,7 +14,10 @@ export default function PuzzleCard ({ puzzle, showPuzzle }) {
 
     return (
         <div className="card-container">
-            <div className="puzzle-date">{months[puzzle.month-1]} {puzzle.day}, {puzzle.year}</div>
+            <div className="puzzle-date">
+                { index === 0 && firstPage ? <span id="new-puzzle">New Puzzle For Today!</span> : '' }
+                {months[puzzle.month-1]} {puzzle.day}, {puzzle.year}
+            </div>
             <div className="thumb-container">
                 <img className="puzzle-thumb" src={puzzle.photoUrl} style={{ width: `${puzzle.width/3}px`, height: `${puzzle.height/3}px`, background: 'red' }} />
             </div>
