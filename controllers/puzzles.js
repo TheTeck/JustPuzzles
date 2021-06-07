@@ -45,7 +45,27 @@ function create(req, res){
 
 async function index(req, res){
     try {
-        const puzzles = await Puzzle.find({}).sort({ year: 1, month: 1, day: 1 })
+        const date = new Date()
+        date.setTime(date - date.getTimezoneOffset() * 60000)
+        const todayYear = date.getFullYear()
+        const todayMonth = date.getMonth() + 1
+        const todayDay = date.getDate()
+
+        const allPuzzles = await Puzzle.find({}).sort({ year: 1, month: 1, day: 1 })
+
+        const puzzles = allPuzzles.filter(puzzle => {
+            if (puzzle.year < todayYear) {
+                return true
+            }
+            else if (puzzle.year === todayYear && puzzle.month < todayMonth) {
+                return true
+            }
+            else if (puzzle.year === todayYear && puzzle.month === todayMonth && puzzle.day <= todayDay) {
+                return true
+            }
+            return false
+        })
+        
         res.status(200).json({ puzzles })
     } catch(err){
         res.json(err)
