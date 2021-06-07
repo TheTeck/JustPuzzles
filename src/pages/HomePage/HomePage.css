@@ -1,12 +1,12 @@
 #home-container {
     width: 100vw;
     min-height: 100vh;
-    background-color: antiquewhite;
+    background-color: var(--bg-primary);
 }
 
 .pagination-display {
     font-size: 1.5em;
-    margin: 20px;
+    margin: 40px;
     position: relative;
 }
 
@@ -16,11 +16,14 @@
     position: absolute;
     left: 50%;
     transform: translateX(-80px);
-    background-color: rgb(80, 80, 80);
+    background-color: var(--primary);
     clip-path: polygon(0 50%, 80% 100%, 80% 0);
     color: rgba(0, 0, 0, 0);
-    cursor: pointer;
-    
+    cursor: pointer;  
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    background-color: rgb(225, 2, 2);
 }
 
 .right-arrow {
@@ -29,7 +32,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(60px);
-    background-color: rgb(80, 80, 80);
+    background-color: var(--primary);
     clip-path: polygon(20% 0, 20% 100%, 100% 50%);
     color: rgba(0, 0, 0, 0);
     cursor: pointer;

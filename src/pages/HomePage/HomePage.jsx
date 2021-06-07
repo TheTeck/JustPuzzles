@@ -11,8 +11,8 @@ export default function HomePage ({ pageNum }) {
     const [ pagePuzzles, setPagePuzzles ] = useState([])
     const [ page, setPage ] = useState(pageNum)
     const [ totalPages, setTotalPages ] = useState(0)
-
     const history = useHistory()
+    const date = new Date()
 
     function showPuzzle (id) {
         history.push(`/puzzle/${id}/options`)
@@ -63,6 +63,7 @@ export default function HomePage ({ pageNum }) {
                 <div onClick={handleRightClick} className="right-arrow"></div>
             </div>
             <Feed puzzles={pagePuzzles} showPuzzle={showPuzzle} firstPage={page === 1 ? true : false}/>
+            <div style={{ padding: '30px' }}>Copyright {date.getFullYear()} - All Rights Reserved</div>
         </div>
     )
 }

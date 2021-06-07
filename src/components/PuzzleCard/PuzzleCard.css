@@ -1,6 +1,6 @@
 .card-container {
     text-align: center;
-    margin: 10px 0;
+    margin: 70px 0;
     position: relative;
 }
 
@@ -19,13 +19,17 @@
     top: -2em;
 }
 
+.puzzle-thumb {
+    box-shadow: 0 5px 10px black;
+}
+
 .play-btn {
     font-size: 1.3em;
     font-weight: 600;
     color: white;
     border: 2px solid rgba(255, 0, 0, 0);
     border-radius: 5px;
-    background-color: rgb(218, 90, 5);
+    background-color: var(--primary);
     margin: 10px;
     padding: 10px;
     cursor: pointer;
@@ -34,11 +38,15 @@
 
 .play-btn:hover {
     background: whitesmoke;
-    border: 2px solid rgb(218, 90, 5);
-    color: rgb(218, 90, 5);
+    border: 2px solid var(--primary);
+    color: var(--primary);
 }
 
 @media screen and (min-width: 1000px) {
+    .card-container {
+        margin: 30px 0;
+    }
+
     .thumb-container {
         width: 50%;
         text-align: right;

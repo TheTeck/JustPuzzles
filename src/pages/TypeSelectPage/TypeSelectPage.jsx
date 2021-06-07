@@ -75,8 +75,8 @@ export default function TypeSelectPage () {
                             <div className="piece-selection-name">Polygons</div>
                             {
                                 type === 'poly' ? 
-                                <div id='polyOut' style={{ backgroundColor: 'rgb(218, 90, 5)'}} >
-                                    <div id='polyIn' style={{ backgroundColor: 'rgb(215, 118, 54)'}} ></div>
+                                <div id='polyOut' style={{ backgroundColor: 'var(--primary'}} >
+                                    <div id='polyIn' style={{ backgroundColor: 'var(--secondary'}} ></div>
                                 </div>
                                 :
                                 <div id='polyOut' style={{ backgroundColor: 'black'}} >
