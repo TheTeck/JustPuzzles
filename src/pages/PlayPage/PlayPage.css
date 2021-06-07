@@ -2,30 +2,56 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgb(113, 216, 216);
+    --mod-color-1: rgb(17, 17, 17);
+    --mod-color-2: rgb(238, 238, 238);
+    --mod-color-3: rgb(113, 216, 216);
 }
 
 .puzzle-done {
+    font-size: 2em;
+    line-height: 1.5em;
+    font-weight: 600;
     position: absolute;
     color: white;
-    top: 50%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.481);
+    background-color: rgba(0, 0, 0, 0.581);
+    border-radius: 10px;
     z-index: 5;
 }
 
-#clock {
+.return-btn {
     position: absolute;
-    right: 20px;
-    top: 20px;
-    font-weight: 500;
-    font-size: 1.2em;
-    z-index: 5;
-    background-color: rgba(0, 0, 0, 0.563);
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: var(--primary);
+    font-size: 1em;
+    font-weight: 600;
     color: white;
-    width: 100px;
-    padding: 5px 10px;
+    border: 2px solid rgba(255, 0, 0, 0);
     border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 180ms ease-in;
+}
+
+.return-btn:hover {
+    background: whitesmoke;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+#bg-changer {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(var(--mod-color-1) 120deg, var(--mod-color-2) 120deg 240deg, var(--mod-color-3) 240deg);
+    cursor: pointer;
 }

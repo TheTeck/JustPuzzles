@@ -132,6 +132,7 @@
     padding: 10px 20px;
     cursor: pointer;
     color: black;
+    transition: all 150ms ease-in;
 }
 
 .sizes span {
@@ -140,6 +141,10 @@
 
 .sizes:hover {
     color: red;
+}
+
+.sizes:active {
+    text-shadow: 0 0 15px red;
 }
 
 #selection-btn {

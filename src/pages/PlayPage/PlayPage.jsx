@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useParams} from 'react-router-dom'
+import { useLocation, useParams, useHistory } from 'react-router-dom'
 import TilePiece from '../../components/TilePiece/TilePiece'
 import PolyPiece from '../../components/PolyPiece/PolyPiece'
 import * as puzzleService from '../../utils/puzzleService'
@@ -21,12 +21,22 @@ export default function PlayPage () {
     const [ force, setForce ] = useState(false)
     const [ puzzleDone, setPuzzleDone ] = useState(false)
     const [ buffer, setBuffer ] = useState(0)
+    const [ color, setColor ] = useState(1)
     
+    const history = useHistory()
     const { id } = useParams()
     let interval = null
       
     
     const snap = new Audio('/snap.mp3')
+
+    function handleBackClick () {
+        history.push('/')
+    }
+
+    function handleColorClick () {
+        setColor(color === 3 ? 1 : color + 1)
+    }
 
     // Add all connected pieces to each other's connected array property
     function bindPieces (piece, otherPiece) {
@@ -213,7 +223,8 @@ export default function PlayPage () {
 
     return (
         <>
-            <div id="puzzle-container" onClick={setActive} onMouseMove={movePiece} >
+            <div id="puzzle-container" onClick={setActive} onMouseMove={movePiece} style={{ backgroundColor: `var(--mod-color-${color})` }}>
+                <div id="bg-changer" onClick={handleColorClick}></div>
                 {
                     thePuzzle.map((piece, index) => {
                         return (
@@ -249,6 +260,7 @@ export default function PlayPage () {
                 puzzleDone ? 
                     <div className="puzzle-done">
                         Congratulations! Puzzle Completed!
+                        <div onClick={handleBackClick} className="return-btn">Back to Homepage</div>
                     </div> : ''
             }
         </>
