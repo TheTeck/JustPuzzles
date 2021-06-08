@@ -45,14 +45,17 @@ export default function PlayPage () {
         const temp = thePuzzle
 
         thePuzzle[piece].connected.forEach(connectedPiece => {
-            temp[connectedPiece].connected = [...allUniqueConnected]
-            temp[connectedPiece].xLoc = thePuzzle[otherPiece].xLoc + (thePuzzle[connectedPiece].x - thePuzzle[otherPiece].x) * pieceSize
+            temp[connectedPiece].connected = allUniqueConnected
+            temp[connectedPiece].xLoc = thePuzzle[otherPiece].xLoc + 
+                (thePuzzle[connectedPiece].x - thePuzzle[otherPiece].x) * pieceSize +
+                (thePuzzle[connectedPiece].x === 0 ? buffer : thePuzzle[piece].x === 0 ? -buffer : 0)
             temp[connectedPiece].yLoc = thePuzzle[otherPiece].yLoc + 
-                (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize
+                (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize + 
+                (thePuzzle[connectedPiece].y === 0 ? buffer : thePuzzle[piece].y === 0 ? -buffer : 0)
         })
 
         thePuzzle[otherPiece].connected.forEach(connectedPiece => {
-            temp[connectedPiece].connected = [...allUniqueConnected]
+            temp[connectedPiece].connected = allUniqueConnected
         })
 
         snap.play()
@@ -77,7 +80,7 @@ export default function PlayPage () {
         }
         // Check if piece to the left of the active piece is in range and snap to it
         if (thePuzzle[piece].x !== 0 && !thePuzzle[piece].connected.includes(piece - 1)) {
-            const offset = piece - 1 % xCount ? 0 : buffer
+            const offset = (piece - 1) % xCount ? 0 : buffer
             if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize - offset)) < 15
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < 15) {
                 outputX = thePuzzle[piece-1].xLoc + pieceSize - offset

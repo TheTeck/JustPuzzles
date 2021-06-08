@@ -10,7 +10,7 @@ export default function TypeSelectPage () {
     const { id } = useParams()
     const history = useHistory()
 
-    const sizeSelection = [ 6, 77, 96, 104, 126, 150, 176, 216, 260, 308 ]
+    const sizeSelection = [ 6, 12, 77, 96, 104, 126, 150, 176, 216, 260, 308 ]
 
     function handleTileClick(e) {
         setType(e.target.getAttribute('name'))
@@ -24,6 +24,7 @@ export default function TypeSelectPage () {
 
         const sizeConversion = {
             '6': 333,
+            '12': 220,
             '77': 85,
             '96': 80,
             '104': 75,
