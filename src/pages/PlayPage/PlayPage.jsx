@@ -41,17 +41,21 @@ export default function PlayPage () {
     // Add all connected pieces to each other's connected array property
     function bindPieces (piece, otherPiece) {
         const allConnected = [ ...thePuzzle[piece].connected, ...thePuzzle[otherPiece].connected ]
-        const allUniqueConnected = [...new Set(allConnected)]
+        const allUniqueConnected = [...new Set(allConnected)].sort((a, b) => (a.y * xCount + a.x) - (b.y * xCount + b.x))
         const temp = thePuzzle
 
         thePuzzle[piece].connected.forEach(connectedPiece => {
             temp[connectedPiece].connected = allUniqueConnected
-            temp[connectedPiece].xLoc = thePuzzle[otherPiece].xLoc + 
-                (thePuzzle[connectedPiece].x - thePuzzle[otherPiece].x) * pieceSize +
+            temp[connectedPiece].xLoc = thePuzzle[piece].xLoc + 
+                (thePuzzle[connectedPiece].x - thePuzzle[piece].x) * pieceSize +
                 (thePuzzle[connectedPiece].x === 0 ? buffer : thePuzzle[piece].x === 0 ? -buffer : 0)
-            temp[connectedPiece].yLoc = thePuzzle[otherPiece].yLoc + 
-                (thePuzzle[connectedPiece].y - thePuzzle[otherPiece].y) * pieceSize + 
+            temp[connectedPiece].yLoc = thePuzzle[piece].yLoc + 
+                (thePuzzle[connectedPiece].y - thePuzzle[piece].y) * pieceSize + 
                 (thePuzzle[connectedPiece].y === 0 ? buffer : thePuzzle[piece].y === 0 ? -buffer : 0)
+        })
+
+        thePuzzle[piece].connected.forEach(connectedPiece => {
+            temp[connectedPiece].connected = allUniqueConnected
         })
 
         thePuzzle[otherPiece].connected.forEach(connectedPiece => {
@@ -190,7 +194,7 @@ export default function PlayPage () {
                             y: y,
                             z: 1,
                             xLoc: Math.floor(Math.random() * (window.innerWidth - pieceSize)),
-                            yLoc: Math.floor(Math.random() * (window.innerHeight - pieceSize)),
+                            yLoc: Math.floor(Math.random() * (window.innerHeight - pieceSize - 100) + 100),
                             description: description,
                             connected: [ xSize * y + x]
                         }
