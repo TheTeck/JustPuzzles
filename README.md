@@ -16,7 +16,7 @@
 ---
 ## Getting Started  
 Here is the link for
-[Just Puzzles](https://sheetmusicmaker.herokuapp.com/)  
+[Just Puzzles](https://just-puzzles.herokuapp.com/)  
 
 
 ---
