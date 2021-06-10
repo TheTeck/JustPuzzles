@@ -1,39 +1,57 @@
-## Setup 
+# Just Puzzles
+## Table Contents  
+* [Overview](#overview)
+* [Getting Started](#getting-started)
+* [Technologies Used](#technologies-used)
+* [Screenshots](#screenshots)
+* [Future Additions](#future-additions)
+---
+---
 
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv mern-boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+
+## Overview  
+*Just Puzzles* is an online source for puzzles that takes an image and breaks it up into the number of pieces and piece shape specified by the user. As the admin, I can upload many images ahead of time and have them released upon the date given to each image for a hands-off daily update. The puzzle mechanics and image selections were designed to create a enjoyable, relaxing and satisfying user experience.
+
+---
+---
+## Getting Started  
+Here is the link for
+[Just Puzzles](https://sheetmusicmaker.herokuapp.com/)  
 
 
-#### Setup your git repo
+---
+---
+## Technologies Used  
+* Frontend
+  * Javascript
+  * HTML
+  * CSS
+  * React
+* Backend
+  * Node.js
+  * Express.js
+  * MongoDB/Mongoose.js
+* Services
+  * AWS
+  * Atlas
+  * Heroku
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
+---
+---
+## Screenshots
 
-it should look like this
+#### Home Page shows all of the available puzzles in order from newest to oldest
+![Home Page](./public/home_page.png) 
+#### Options Page gives the user the chance to change the puzzle piece style and count
+![Options Page](./public/options_page.png) 
+#### Play Page is where the user can put the puzzle together
+![Play Page](./public/play_page.png) 
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin master
-```
-
-#### Setup the App
-
-```npm install```
-
-*DOTENV*
-
-`touch .env`
-
-add your variables
-
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
-
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+---
+---
+## Future Additions:  
+* Add more puzzle piece styles, including the classic jigsaw shapes
+* Add a timer that will start when the user first clicks a piece and ends when the puzzle is completed
+* Add a the fastest completion time for each puzzle, shown on the homepage
+* Add a counter for the number of times a puzzle has been completed
+* Include catagories which the user can filter the puzzles by
