@@ -6,6 +6,7 @@ import AdminPage from '../AdminPage/AdminPage'
 import HomePage from '../HomePage/HomePage'
 import TypeSelectPage from '../TypeSelectPage/TypeSelectPage'
 import PlayPage from '../PlayPage/PlayPage'
+import ViewPuzzlesPage from '../ViewPuzzlesPage/ViewPuzzlesPage'
 import adminService from '../../utils/adminService'
 
 
@@ -44,6 +45,9 @@ function App() {
              <Switch>
                 <Route exact path="/admin">
                     <AdminPage admin={admin} handleLogout={handleLogout} />
+                </Route>
+                <Route exact path="/viewpuzzles">
+                    <ViewPuzzlesPage />
                 </Route>
             </Switch>
             </>

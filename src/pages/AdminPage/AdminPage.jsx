@@ -7,6 +7,7 @@ import './AdminPage.css'
 export default function AdminPage ({ admin, handleLogout }) {
     
     const [selectedFile, setSelectedFile] = useState('')
+    const [loading, setLoading] = useState(false)
     const [state, setState] = useState({
         width: '',
         height: '',
@@ -85,6 +86,10 @@ export default function AdminPage ({ admin, handleLogout }) {
         history.push('/')
     }
 
+    function handleViewClick () {
+        history.push('/viewpuzzles')
+    }
+
     function handleFileInput(e){
         setSelectedFile(e.target.files[0])
     }
@@ -134,8 +139,9 @@ export default function AdminPage ({ admin, handleLogout }) {
 
     async function handleAddPuzzle(puzzle){
         try {
+            setLoading(true)
             const data = await puzzleService.create(puzzle)
-            console.log(data)    
+            setLoading(false)    
         } catch(err){
             console.log(err)
         }
@@ -143,7 +149,8 @@ export default function AdminPage ({ admin, handleLogout }) {
 
     return (
         <div id="admin-container">
-            <div onClick={handleLogoutClick} id="logout-btn">Log Out</div>
+            <div onClick={handleLogoutClick} id="logout-btn" style={{ left: '50px' }}>Log Out</div>
+            <div onClick={handleViewClick} id="view-btn" style={{ left: '150px' }}>View Puzzles</div>
             <Grid id="form-container" textAlign='left' verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Segment>
@@ -217,6 +224,7 @@ export default function AdminPage ({ admin, handleLogout }) {
                                 </Button>
                             </div>
                         </Form>
+                        <div>{ loading ? 'Loading...' : '' }</div>
                     </Segment>
                 </Grid.Column>
             </Grid>

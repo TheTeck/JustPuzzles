@@ -1,0 +1,25 @@
+.admin-card {
+    margin: 1em;
+    font-size: 2em;
+    position: relative;
+}
+
+.close-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: 500;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    background: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-card:hover {
+    box-shadow: 0 0 5px black;
+}

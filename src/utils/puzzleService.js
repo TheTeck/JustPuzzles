@@ -24,7 +24,7 @@ export function getOne(puzzleID) {
     }).then(res => res.json())
 }
 
-export function removePUzzle(puzzleID){
+export function removePuzzle(puzzleID){
     return fetch(`${BASE_URL}/${puzzleID}`, {
         method: 'DELETE',
         headers: {

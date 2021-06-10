@@ -11,9 +11,8 @@
     transform: translate(-50%, -50%);
 }
 
-#logout-btn {
+#logout-btn, #view-btn {
     position: absolute;
-    left: 50px;
     top: 50px;
     color: white;
     font-weight: 600;
@@ -25,7 +24,7 @@
     transition: all 250ms ease-in;
 }
 
-#logout-btn:hover {
+#logout-btn:hover, #view-btn:hover {
     border: 2px solid rgb(219, 5, 5);
     background-color: white;
     color: rgb(219, 5, 5);
