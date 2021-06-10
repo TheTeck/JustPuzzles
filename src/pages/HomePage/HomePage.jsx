@@ -21,17 +21,19 @@ export default function HomePage ({ pageNum }) {
     function handleLeftClick () {
         if (page > 1) {
             setPage(page - 1)
+            updatePuzzleList(page - 1)
         }
     }
 
     function handleRightClick () {
         if (page < totalPages) {
             setPage(page + 1)
+            updatePuzzleList(page + 1)
         }
     }
 
-    function updatePuzzleList () {
-        const onePageOfPuzzles = allPuzzles.slice(10*(page-1), 10*page)
+    function updatePuzzleList (thePage) {
+        const onePageOfPuzzles = allPuzzles.slice(10*(thePage-1), 10*thePage)
         setPagePuzzles(onePageOfPuzzles)
     }
 
@@ -41,14 +43,12 @@ export default function HomePage ({ pageNum }) {
             data.puzzles = data.puzzles.reverse()
             setAllPuzzles(data.puzzles)
             setTotalPages(Math.ceil(data.puzzles.length / 10))
+            const onePageOfPuzzles = data.puzzles.slice(10*(page-1), 10*page)
+            setPagePuzzles(onePageOfPuzzles)
         } catch(err){
             console.log(err, 'Could not load puzzles')
         }
     }
-
-    useEffect(() => {
-        updatePuzzleList()
-    })
 
     useEffect(() => {
         getPuzzles()

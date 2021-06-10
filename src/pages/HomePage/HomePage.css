@@ -24,7 +24,7 @@
 }
 
 .left-arrow:hover, .right-arrow:hover {
-    background-color: rgb(225, 2, 2);
+    background-color: red;
 }
 
 .right-arrow {
