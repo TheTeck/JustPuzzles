@@ -11,6 +11,7 @@ async function login(req, res) {
     try {
         if (req.body.username === ADMIN_NAME && req.body.password === ADMIN_PASSWORD) {
             const token = createJWT(req.body.username);
+            console.log(req.user)
             res.json({token});
         } else {
             return res.status(401).json({err: 'bad credentials'});
