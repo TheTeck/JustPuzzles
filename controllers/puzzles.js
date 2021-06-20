@@ -75,6 +75,13 @@ async function index(req, res){
 async function show(req, res) {
     try {
         const puzzle = await Puzzle.findOne({ _id: req.params.id })
+        if (!puzzle.views) {
+            puzzle.views = 1
+        } else {
+            puzzle.views = puzzle.views + 1
+        }
+        await puzzle.save()
+        console.log(puzzle.views)
         res.json({ puzzle })
     } catch (err) {
         res.json(err)

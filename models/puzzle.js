@@ -6,7 +6,11 @@ const puzzleSchema = new mongoose.Schema({
     height: Number,
     month: Number,
     day: Number,
-    year: Number
+    year: Number,
+    views: {
+      type: Number,
+      default: 0
+    }
   })
  
 

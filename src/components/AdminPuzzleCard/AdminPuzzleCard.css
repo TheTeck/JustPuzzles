@@ -23,3 +23,7 @@
 .close-card:hover {
     box-shadow: 0 0 5px black;
 }
+
+.views {
+    color: red;
+}
