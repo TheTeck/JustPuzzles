@@ -219,8 +219,11 @@ export default function PlayPage () {
 
             if (type === 'tile')
                 setBuffer(0)
-            if (type === 'poly')
-                setBuffer(pieceSize / 70 * 15)
+            if (type === 'poly') {
+                const PERCENT_OF_VISUAL_TILE = 70 // visual tiile will be 70% of total size with buffer
+                const PERCENT_OF_BUFFER = (100 - PERCENT_OF_VISUAL_TILE) / 2
+                setBuffer(pieceSize / PERCENT_OF_VISUAL_TILE * PERCENT_OF_BUFFER)
+            }
 
             setThePuzzle(temp)
         } catch (err) {
