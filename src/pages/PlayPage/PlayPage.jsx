@@ -25,7 +25,11 @@ export default function PlayPage () {
     
     const history = useHistory()
     const { id } = useParams()
-    let interval = null
+
+    const SNAP_GAP = 15 //within 15px pieces will snap together
+    const POLY_BUFFER = 30 // 30% of piece size
+    const VERTEX_RANGE = 40 // the middle 40% of a size
+    const VERTEX_RANGE_OFFSET = (100 - VERTEX_RANGE) / 2 // Basically 30%
       
     
     const snap = new Audio('/snap.mp3')
@@ -74,8 +78,8 @@ export default function PlayPage () {
         // Check if piece above active piece is in range and snap to it
         if (thePuzzle[piece].y !== 0 && !thePuzzle[piece].connected.includes(piece - xCount)) {
             const offset = piece-xCount < xCount ? buffer : 0
-            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize - offset)) < 15
-                && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < 15) {
+            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize - offset)) < SNAP_GAP
+                && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece-xCount].xLoc
                 outputY = thePuzzle[piece-xCount].yLoc + pieceSize - offset
                 bindPieces(piece, piece-xCount)
@@ -85,8 +89,8 @@ export default function PlayPage () {
         // Check if piece to the left of the active piece is in range and snap to it
         if (thePuzzle[piece].x !== 0 && !thePuzzle[piece].connected.includes(piece - 1)) {
             const offset = (piece - 1) % xCount ? 0 : buffer
-            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize - offset)) < 15
-                && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < 15) {
+            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-1].xLoc + pieceSize - offset)) < SNAP_GAP
+                && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece-1].xLoc + pieceSize - offset
                 outputY = thePuzzle[piece-1].yLoc
                 bindPieces(piece, piece-1)
@@ -96,8 +100,8 @@ export default function PlayPage () {
         // Check if piece below active piece is in range and snap to it
         if (thePuzzle[piece].y !== yCount-1 && !thePuzzle[piece].connected.includes(piece + xCount)) {
             const offset = piece < xCount ? buffer : 0
-            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+xCount].yLoc - pieceSize + offset)) < 15
-                && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+xCount].xLoc)) < 15) {
+            if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+xCount].yLoc - pieceSize + offset)) < SNAP_GAP
+                && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+xCount].xLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece+xCount].xLoc
                 outputY = thePuzzle[piece+xCount].yLoc - pieceSize + offset
                 bindPieces(piece, piece+xCount)
@@ -107,8 +111,8 @@ export default function PlayPage () {
         // Check if piece to the right of the active piece is in range and snap to it
         if (thePuzzle[piece].x !== xCount-1 && !thePuzzle[piece].connected.includes(piece + 1)) {
             const offset = piece % xCount ? 0 : buffer
-            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+1].xLoc - pieceSize + offset)) < 15
-                && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+1].yLoc)) < 15) {
+            if (Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+1].xLoc - pieceSize + offset)) < SNAP_GAP
+                && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+1].yLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece+1].xLoc - pieceSize + offset
                 outputY = thePuzzle[piece+1].yLoc
                 bindPieces(piece, piece+1)
@@ -202,10 +206,10 @@ export default function PlayPage () {
 
                     // Establish edges in-between polygon pieces
                     if (type === 'poly' && x !== xSize - 1) {
-                        vEdgeBuilder[y].push([Math.floor(Math.random() * 30) - 15, Math.floor(Math.random() * 40) + 30])
+                        vEdgeBuilder[y].push([Math.floor(Math.random() * POLY_BUFFER) - POLY_BUFFER / 2, Math.floor(Math.random() * VERTEX_RANGE) + VERTEX_RANGE_OFFSET])
                     }
                     if (type === 'poly' && y !== ySize - 1) {
-                        hEdgeBuilder[y].push([Math.floor(Math.random() * 30) - 15, Math.floor(Math.random() * 40) + 30])
+                        hEdgeBuilder[y].push([Math.floor(Math.random() * POLY_BUFFER) - POLY_BUFFER / 2, Math.floor(Math.random() * VERTEX_RANGE) + VERTEX_RANGE_OFFSET])
                     }
                 }
             }
