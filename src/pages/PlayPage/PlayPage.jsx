@@ -70,8 +70,8 @@ export default function PlayPage () {
         setThePuzzle(temp)
     }
 
-    // Determins is a piece is in range to connect and binds them
-    function bindConnection (piece) {
+    // Determines if a piece is in range to connect
+    function checkConnection (piece) {
         let outputX = thePuzzle[piece].xLoc
         let outputY = thePuzzle[piece].yLoc
 
@@ -82,8 +82,7 @@ export default function PlayPage () {
                 && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece-xCount].xLoc
                 outputY = thePuzzle[piece-xCount].yLoc + pieceSize - offset
-                bindPieces(piece, piece-xCount)
-                return [ outputX, outputY ]
+                return [ outputX, outputY, piece - xCount ]
             }
         }
         // Check if piece to the left of the active piece is in range and snap to it
@@ -93,8 +92,7 @@ export default function PlayPage () {
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-1].yLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece-1].xLoc + pieceSize - offset
                 outputY = thePuzzle[piece-1].yLoc
-                bindPieces(piece, piece-1)
-                return [ outputX, outputY ]
+                return [ outputX, outputY, piece - 1 ]
             }
         }
         // Check if piece below active piece is in range and snap to it
@@ -104,8 +102,7 @@ export default function PlayPage () {
                 && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece+xCount].xLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece+xCount].xLoc
                 outputY = thePuzzle[piece+xCount].yLoc - pieceSize + offset
-                bindPieces(piece, piece+xCount)
-                return [ outputX, outputY ]
+                return [ outputX, outputY, piece + xCount ]
             }
         }
         // Check if piece to the right of the active piece is in range and snap to it
@@ -115,8 +112,7 @@ export default function PlayPage () {
                 && Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece+1].yLoc)) < SNAP_GAP) {
                 outputX = thePuzzle[piece+1].xLoc - pieceSize + offset
                 outputY = thePuzzle[piece+1].yLoc
-                bindPieces(piece, piece+1)
-                return [ outputX, outputY ]
+                return [ outputX, outputY, piece + 1 ]
             }
         }
 
@@ -130,10 +126,14 @@ export default function PlayPage () {
                 temp[currentActive].z = 0
             }
             temp[currentActive].connected.forEach(piece => {
-                let locs = bindConnection(piece)
+                let [newX, newY, otherPiece] = checkConnection(piece)
+                
+                if(otherPiece)
+                    bindPieces(piece, otherPiece)
+                
                 temp[piece].z = 1
-                temp[piece].xLoc = locs[0]
-                temp[piece].yLoc = locs[1]
+                temp[piece].xLoc = newX
+                temp[piece].yLoc = newY
             })
             setThePuzzle(temp)
             setCurrentActive(null)
