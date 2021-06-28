@@ -70,8 +70,8 @@ export default function PlayPage () {
         setThePuzzle(temp)
     }
 
-    // Look for a connection between pieces
-    function checkConnection (piece) {
+    // Determins is a piece is in range to connect and binds them
+    function bindConnection (piece) {
         let outputX = thePuzzle[piece].xLoc
         let outputY = thePuzzle[piece].yLoc
 
@@ -126,8 +126,11 @@ export default function PlayPage () {
     function setActive(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
+            if (temp[currentActive].connected.length <= 1) {
+                temp[currentActive].z = 0
+            }
             temp[currentActive].connected.forEach(piece => {
-                let locs = checkConnection(piece)
+                let locs = bindConnection(piece)
                 temp[piece].z = 1
                 temp[piece].xLoc = locs[0]
                 temp[piece].yLoc = locs[1]
@@ -196,7 +199,7 @@ export default function PlayPage () {
                         {
                             x: x,
                             y: y,
-                            z: 1,
+                            z: 0,
                             xLoc: Math.floor(Math.random() * (window.innerWidth - pieceSize)),
                             yLoc: Math.floor(Math.random() * (window.innerHeight - pieceSize - 100) + 100),
                             description: description,
