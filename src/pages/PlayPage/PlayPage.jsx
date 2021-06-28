@@ -11,7 +11,7 @@ export default function PlayPage () {
     const pieceSize = location.state.size
     const type = location.state.type
 
-    const [ puzzle, setPuzzle ] = useState({})
+    const [ puzzleImage, setPuzzleImage ] = useState({})
     const [ xCount, setXCount ] = useState()
     const [ yCount, setYCount ] = useState()
     const [ currentActive, setCurrentActive ] = useState(null)
@@ -174,10 +174,10 @@ export default function PlayPage () {
     
     async function setupPuzzle () {
         try {
-            const thePuzzle = await puzzleService.getOne(id)
-            setPuzzle(thePuzzle.puzzle)
-            const xSize = Math.floor(thePuzzle.puzzle.width / pieceSize)
-            const ySize = Math.floor(thePuzzle.puzzle.height / pieceSize)
+            const puzzleImg = await puzzleService.getOne(id)
+            setPuzzleImage(puzzleImg.puzzle)
+            const xSize = Math.floor(puzzleImg.puzzle.width / pieceSize)
+            const ySize = Math.floor(puzzleImg.puzzle.height / pieceSize)
             setXCount(xSize)
             setYCount(ySize)
             
@@ -251,7 +251,7 @@ export default function PlayPage () {
                                         <TilePiece 
                                             key={index}
                                             piece={piece}
-                                            image={puzzle.photoUrl}
+                                            image={puzzleImage.photoUrl}
                                             id={index}
                                             size={pieceSize}
                                         />
@@ -259,7 +259,7 @@ export default function PlayPage () {
                                         <PolyPiece 
                                             key={index}
                                             piece={piece}
-                                            image={puzzle.photoUrl}
+                                            image={puzzleImage.photoUrl}
                                             id={index}
                                             size={pieceSize}
                                             vEdges={vEdges}
