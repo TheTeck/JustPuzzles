@@ -36,12 +36,12 @@
     padding: 10px;
     cursor: pointer;
     transition: all 180ms ease-in;
-}
 
-.return-btn:hover {
-    background: whitesmoke;
-    border: 2px solid $primary-color;
-    color: $primary-color;
+    &:hover {
+        background: whitesmoke;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+    }
 }
 
 #bg-changer {

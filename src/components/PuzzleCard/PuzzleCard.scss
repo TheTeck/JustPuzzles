@@ -38,12 +38,12 @@
     padding: 10px;
     cursor: pointer;
     transition: all 180ms ease-in;
-}
 
-.play-btn:hover {
-    background: whitesmoke;
-    border: 2px solid $primary-color;
-    color: $primary-color;
+    &:hover {
+        background: whitesmoke;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+    }
 }
 
 @media screen and (min-width: 1000px) {

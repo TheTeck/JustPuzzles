@@ -20,10 +20,10 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
 
-.close-card:hover {
-    box-shadow: 0 0 5px black;
+    &:hover {
+        box-shadow: 0 0 5px black;
+    }
 }
 
 .views {

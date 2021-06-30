@@ -24,10 +24,10 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 250ms ease-in;
-}
 
-#logout-btn:hover, #view-btn:hover {
-    border: 2px solid $primary-color;
-    background-color: white;
-    color: $primary-color;
+    &:hover {
+        border: 2px solid $primary-color;
+        background-color: white;
+        color: $primary-color;
+    }
 }
