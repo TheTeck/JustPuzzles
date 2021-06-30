@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './AdminPuzzleCard.css'
+import './AdminPuzzleCard.scss'
 
 export default function AdminPuzzleCard ({ puzzle, deletePuzzle }) {
 

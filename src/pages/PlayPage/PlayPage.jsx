@@ -3,7 +3,7 @@ import { useLocation, useParams, useHistory } from 'react-router-dom'
 import TilePiece from '../../components/TilePiece/TilePiece'
 import PolyPiece from '../../components/PolyPiece/PolyPiece'
 import * as puzzleService from '../../utils/puzzleService'
-import './PlayPage.css'
+import './PlayPage.scss'
 
 export default function PlayPage () {
 

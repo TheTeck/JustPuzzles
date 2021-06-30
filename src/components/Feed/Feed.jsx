@@ -1,6 +1,6 @@
 import React from 'react'
 import PuzzleCard from '../../components/PuzzleCard/PuzzleCard'
-import './Feed.css'
+import './Feed.scss'
 
 export default function Feed ({ puzzles, showPuzzle, firstPage }) {
     return (

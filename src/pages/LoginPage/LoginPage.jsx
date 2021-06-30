@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginPage.css';
+import './LoginPage.scss';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import adminService from '../../utils/adminService';
 import { useHistory, Link } from 'react-router-dom';

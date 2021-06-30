@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import Feed from '../../components/Feed/Feed'
 import * as puzzleService from '../../utils/puzzleService'
-import './HomePage.css'
+import './HomePage.scss'
 
 export default function HomePage ({ pageNum }) {
 
