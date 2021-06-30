@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginPage.scss';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import adminService from '../../utils/adminService';
-import { useHistory, Link } from 'react-router-dom';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 
 export default function LoginPage(props){
     
-    const [invalidForm, setValidForm] = useState(false);
+    const [invalidForm, setInvalidForm] = useState(true);
     const [error, setError ]          = useState('')
     const [state, setState]       = useState({
         username: '',
@@ -40,6 +40,13 @@ export default function LoginPage(props){
           setError(err.message)
         }
     }
+
+    useEffect(() => {
+      if (state.username !== '' && state.password !== '' && invalidForm)
+        setInvalidForm(false)
+      else if ((state.username === '' || state.password === '') && !invalidForm)
+      setInvalidForm(true)
+    })
 
     return (
         <>
