@@ -1,5 +1,5 @@
 import React from 'react'
-import './TilePiece.css'
+import './TilePiece.scss'
 
 export default function TilePiece ({ image, size, id, piece}) {
     return (

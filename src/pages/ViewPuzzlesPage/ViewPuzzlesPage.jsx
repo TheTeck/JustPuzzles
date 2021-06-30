@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './ViewPuzzlesPage.css'
+import './ViewPuzzlesPage.scss'
 import AdminFeed from '../../components/AdminFeed/AdminFeed'
 import * as puzzleService from '../../utils/puzzleService'
 

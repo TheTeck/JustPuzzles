@@ -1,5 +1,5 @@
 import React from 'react'
-import './PuzzleCard.css'
+import './PuzzleCard.scss'
 
 export default function PuzzleCard ({ puzzle, showPuzzle, index, firstPage }) {
 

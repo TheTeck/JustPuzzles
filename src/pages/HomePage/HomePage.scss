@@ -1,8 +1,10 @@
+@import '../../scss/colors';
+
 #home-container {
     width: 100vw;
     min-height: 100vh;
-    background-color: var(--bg-primary);
-    background: radial-gradient(ellipse at top, var(--bg-primary), rgba(0, 0, 0, 0.799));
+    background-color: $bg-primary-color;
+    background: radial-gradient(ellipse at top, $bg-primary-color, rgba(0, 0, 0, 0.799));
 }
 
 .pagination-display {
@@ -17,14 +19,14 @@
     position: absolute;
     left: 50%;
     transform: translateX(-80px);
-    background-color: var(--primary);
+    background-color: $primary-color;
     clip-path: polygon(0 50%, 80% 100%, 80% 0);
     color: rgba(0, 0, 0, 0);
     cursor: pointer;  
 }
 
 .left-arrow:hover, .right-arrow:hover {
-    background-color: red;
+    background-color: $active-color;
 }
 
 .right-arrow {
@@ -33,7 +35,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(60px);
-    background-color: var(--primary);
+    background-color: $primary-color;
     clip-path: polygon(20% 0, 20% 100%, 100% 50%);
     color: rgba(0, 0, 0, 0);
     cursor: pointer;

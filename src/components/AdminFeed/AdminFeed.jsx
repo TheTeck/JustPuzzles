@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminPuzzleCard from '../AdminPuzzleCard/AdminPuzzleCard'
-import './AdminFeed.css'
+import './AdminFeed.scss'
 
 export default function AdminFeed ({ puzzles, deletePuzzle }) {
     return (

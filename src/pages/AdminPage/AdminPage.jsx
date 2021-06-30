@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Form, Grid, Segment } from 'semantic-ui-react'
 import * as puzzleService from '../../utils/puzzleService'
-import './AdminPage.css'
+import './AdminPage.scss'
 
 export default function AdminPage ({ admin, handleLogout }) {
     

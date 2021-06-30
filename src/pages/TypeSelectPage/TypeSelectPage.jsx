@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import Header from '../../components/Header/Header'
-import './TypeSelectPage.css';
+import './TypeSelectPage.scss';
 
 export default function TypeSelectPage () {
 

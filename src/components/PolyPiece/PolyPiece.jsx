@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './PolyPiece.css'
+import './PolyPiece.scss'
 
 export default function PolyPiece ({ image, size, id, piece, vEdges, hEdges, xCount, yCount }) {
 

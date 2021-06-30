@@ -1,10 +1,9 @@
+@import '../../scss/_colors.scss';
+
 #puzzle-container {
     position: absolute;
     width: 100%;
     height: 100%;
-    --mod-color-1: rgb(17, 17, 17);
-    --mod-color-2: rgb(238, 238, 238);
-    --mod-color-3: rgb(113, 216, 216);
 }
 
 .puzzle-done {
@@ -28,7 +27,7 @@
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    background-color: var(--primary);
+    background-color: $primary-color;
     font-size: 1em;
     font-weight: 600;
     color: white;
@@ -41,8 +40,8 @@
 
 .return-btn:hover {
     background: whitesmoke;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid $primary-color;
+    color: $primary-color;
 }
 
 #bg-changer {
@@ -52,6 +51,6 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: conic-gradient(var(--mod-color-1) 120deg, var(--mod-color-2) 120deg 240deg, var(--mod-color-3) 240deg);
+    background: conic-gradient($mod-color-1 120deg, $mod-color-2 120deg 240deg, $mod-color-3 240deg);
     cursor: pointer;
 }
