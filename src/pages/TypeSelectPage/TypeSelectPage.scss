@@ -112,6 +112,14 @@
     transform: translate(30%, 50%);
 }
 
+.poly-selected {
+    background-color: $primary-color;
+
+    #polyIn {
+        background-color: $secondary-color;
+    }
+}
+
 #polyOut {
     width: 65px;
     height: 65px;
