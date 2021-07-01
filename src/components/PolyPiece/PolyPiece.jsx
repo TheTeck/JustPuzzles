@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './PolyPiece.scss'
 
-export default function PolyPiece ({ image, size, id, piece, vEdges, hEdges, xCount, yCount }) {
+export default function PolyPiece ({ image, size, id, piece, vEdges, hEdges, xCount, yCount, setActive }) {
 
     const modPecent = size / 70     // size of piece represents 70% of total size
     const buffer = 15 * modPecent   // 15% buffer around piece
@@ -12,6 +12,10 @@ export default function PolyPiece ({ image, size, id, piece, vEdges, hEdges, xCo
     const [yOffset, setYOffset] = useState()
     const [edges, setEdges] = useState([[0,0],[0,0],[0,0],[0,0]])
     const [perimeter, setPerimeter] = useState([15,85,85,15])
+
+    function handlePieceClick(e) {
+        setActive(e)
+    }
 
     function setTheWidth () {
         if (/left/.test(piece.description) || /right/.test(piece.description))
@@ -68,6 +72,7 @@ export default function PolyPiece ({ image, size, id, piece, vEdges, hEdges, xCo
 
     return (
         <div 
+            onClick={handlePieceClick}
             id={id}
             className="poly-piece"
             style={{ 
