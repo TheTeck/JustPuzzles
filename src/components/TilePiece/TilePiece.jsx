@@ -1,9 +1,15 @@
 import React from 'react'
 import './TilePiece.scss'
 
-export default function TilePiece ({ image, size, id, piece}) {
+export default function TilePiece ({ image, size, id, piece, setActive}) {
+
+    function handlePieceClick(e) {
+        setActive(e)
+    }
+
     return (
         <div 
+            onClick={handlePieceClick}
             id={id}
             className="tile-piece"
             style={{ 

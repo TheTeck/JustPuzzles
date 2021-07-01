@@ -241,7 +241,7 @@ export default function PlayPage () {
 
     return (
         <>
-            <div id="puzzle-container" className={`bg-color-${color}`} onClick={setActive} onMouseMove={movePiece} >
+            <div id="puzzle-container" className={`bg-color-${color}`} onMouseMove={movePiece} >
                 <ColorSelector handleColorSelection={handleColorSelection} />
                 {
                     thePuzzle.map((piece, index) => {
@@ -250,6 +250,7 @@ export default function PlayPage () {
                                 {
                                     type === 'tile' ?
                                         <TilePiece 
+                                            setActive={setActive}
                                             key={index}
                                             piece={piece}
                                             image={puzzleImage.photoUrl}
@@ -258,6 +259,7 @@ export default function PlayPage () {
                                         />
                                     :
                                         <PolyPiece 
+                                            setActive={setActive}
                                             key={index}
                                             piece={piece}
                                             image={puzzleImage.photoUrl}
