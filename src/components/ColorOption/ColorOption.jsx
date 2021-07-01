@@ -8,6 +8,6 @@ export default function ColorOption ({ color, handleColorSelection }) {
     }
 
     return (
-        <div onClick={handleClick} className={`color-option color-option-${color}`}></div>
+        <div onClick={handleClick} className={`color-option-${color}`}></div>
     )
 }

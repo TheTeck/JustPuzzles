@@ -57,16 +57,16 @@ export default function TypeSelectPage () {
                             {
                                 type === 'tile' ? 
                                 <>
-                                    <div className='tileRed' id="tile1"></div>
-                                    <div className='tileRed' id="tile2"></div>
-                                    <div className='tileRed' id="tile3"></div>
-                                    <div className='tileRed' id="tile4"></div>
+                                    <div className='tileRed tile1'></div>
+                                    <div className='tileRed tile2'></div>
+                                    <div className='tileRed tile3'></div>
+                                    <div className='tileRed tile4'></div>
                                 </> :
                                 <>
-                                    <div className='tileBlack' id="tile1"></div>
-                                    <div className='tileBlack' id="tile2"></div>
-                                    <div className='tileBlack' id="tile3"></div>
-                                    <div className='tileBlack' id="tile4"></div>
+                                    <div className='tileBlack tile1'></div>
+                                    <div className='tileBlack tile2'></div>
+                                    <div className='tileBlack tile3'></div>
+                                    <div className='tileBlack tile4'></div>
                                 </>
                             }
                         </div>

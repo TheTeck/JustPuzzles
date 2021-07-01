@@ -1,6 +1,6 @@
 @import '../../scss/_colors';
 
-.color-option {
+%color-option {
     width: 50%;
     height: 50%;
     border-radius: 50%;
@@ -8,17 +8,21 @@
 }
 
 .color-option-1 {
+    @extend %color-option;
     background-color: $mod-color-1;
 }
 
 .color-option-2 {
+    @extend %color-option;
     background-color: $mod-color-2;
 }
 
 .color-option-3 {
+    @extend %color-option;
     background-color: $mod-color-3;
 }
 
 .color-option-4 {
+    @extend %color-option;
     background-color: $mod-color-4;
 }
