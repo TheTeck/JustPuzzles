@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, useParams, useHistory } from 'react-router-dom'
 import TilePiece from '../../components/TilePiece/TilePiece'
 import PolyPiece from '../../components/PolyPiece/PolyPiece'
+import ColorSelector from '../../components/ColorSelector/ColorSelector'
 import * as puzzleService from '../../utils/puzzleService'
 import './PlayPage.scss'
 
@@ -38,8 +39,8 @@ export default function PlayPage () {
         history.push('/')
     }
 
-    function handleColorClick () {
-        setColor(color === 3 ? 1 : color + 1)
+    function handleColorSelection (colorVal) {
+        setColor(colorVal)
     }
 
     // Add all connected pieces to each other's connected array property
@@ -240,8 +241,8 @@ export default function PlayPage () {
 
     return (
         <>
-            <div id="puzzle-container" onClick={setActive} onMouseMove={movePiece} style={{ backgroundColor: `var(--mod-color-${color})` }}>
-                <div id="bg-changer" onClick={handleColorClick}></div>
+            <div id="puzzle-container" className={`bg-color-${color}`} onClick={setActive} onMouseMove={movePiece} >
+                <ColorSelector handleColorSelection={handleColorSelection} />
                 {
                     thePuzzle.map((piece, index) => {
                         return (
