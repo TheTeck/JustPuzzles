@@ -1,0 +1,61 @@
+@import '../../scss/_colors.scss';
+
+#puzzle-page-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-color-1 {
+    background-color: $mod-color-1;
+}
+
+.bg-color-2 {
+    background-color: $mod-color-2;
+}
+
+.bg-color-3 {
+    background-color: $mod-color-3;
+}
+
+.bg-color-4 {
+    background-color: $mod-color-4;
+}
+
+.puzzle-done {
+    font-size: 2em;
+    line-height: 1.5em;
+    font-weight: 600;
+    position: absolute;
+    color: white;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.581);
+    border-radius: 10px;
+    z-index: 5;
+}
+
+.return-btn {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: $primary-color;
+    font-size: 1em;
+    font-weight: 600;
+    color: white;
+    border: 2px solid rgba(255, 0, 0, 0);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 180ms ease-in;
+
+    &:hover {
+        background: whitesmoke;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+    }
+}

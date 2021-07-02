@@ -6,6 +6,7 @@ import AdminPage from '../AdminPage/AdminPage'
 import HomePage from '../HomePage/HomePage'
 import TypeSelectPage from '../TypeSelectPage/TypeSelectPage'
 import PlayPage from '../PlayPage/PlayPage'
+import PuzzlePage from '../PuzzlePage/PuzzlePage'
 import ViewPuzzlesPage from '../ViewPuzzlesPage/ViewPuzzlesPage'
 import adminService from '../../utils/adminService'
 
@@ -35,7 +36,8 @@ function App() {
             <TypeSelectPage />
           </Route>
           <Route exact path="/puzzle/:id">
-            <PlayPage />
+            {/* <PlayPage /> */}
+            <PuzzlePage />
           </Route>
           <Route exact path="/">
               <HomePage pageNum={1} />
