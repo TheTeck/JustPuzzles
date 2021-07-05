@@ -220,7 +220,6 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
     }
 
     useEffect(() => {
-        pieceSize = 320
         setupPuzzle()
     }, [])
 
