@@ -31,6 +31,6 @@ export default function ViewPuzzlesPage () {
     }, [])
 
     return (
-        <div>{puzzles ? <AdminFeed puzzles={puzzles} deletePuzzle={deletePuzzle} /> : 'No puzzles available'}</div>
+        <div className="view-puzzles-page-container">{puzzles ? <AdminFeed puzzles={puzzles} deletePuzzle={deletePuzzle} /> : 'No puzzles available'}</div>
     )
 }
