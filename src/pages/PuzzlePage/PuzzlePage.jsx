@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, useParams, useHistory } from 'react-router-dom'
 import ColorSelector from '../../components/ColorSelector/ColorSelector'
+import Timer from '../../components/Timer/Timer'
 import Puzzle from '../../components/Puzzle/Puzzle'
 import './PuzzlePage.scss'
 
@@ -32,6 +33,7 @@ export default function PuzzlePage () {
         <>
             <div id="puzzle-page-container" className={`bg-color-${color}`}>
                 <ColorSelector handleColorSelection={handleColorSelection} />
+                <Timer pause={puzzleDone} />
                 <Puzzle id={id} type={type} pieceSize={pieceSize} handlePuzzleComplete={handlePuzzleComplete} />
             </div>
             {
