@@ -6,10 +6,6 @@ import './Puzzle.scss'
 
 export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
 
-    // const location = useLocation()
-    // const pieceSize = location.state.size
-    // const type = location.state.type
-
     const [ puzzleImage, setPuzzleImage ] = useState({})
     const [ xCount, setXCount ] = useState()
     const [ yCount, setYCount ] = useState()
@@ -26,7 +22,7 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
     const VERTEX_RANGE_OFFSET = (100 - VERTEX_RANGE) / 2 // Basically 30%
       
     
-    const snap = new Audio('/snap.mp3')
+    
 
     // Add all connected pieces to each other's connected array property
     function bindPieces (piece, otherPiece) {
@@ -39,9 +35,11 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
             temp[connectedPiece].xLoc = thePuzzle[piece].xLoc + 
                 (thePuzzle[connectedPiece].x - thePuzzle[piece].x) * pieceSize +
                 (thePuzzle[connectedPiece].x === 0 ? buffer : thePuzzle[piece].x === 0 ? -buffer : 0)
+                
             temp[connectedPiece].yLoc = thePuzzle[piece].yLoc + 
                 (thePuzzle[connectedPiece].y - thePuzzle[piece].y) * pieceSize + 
                 (thePuzzle[connectedPiece].y === 0 ? buffer : thePuzzle[piece].y === 0 ? -buffer : 0)
+                
         })
 
         thePuzzle[piece].connected.forEach(connectedPiece => {
@@ -65,7 +63,7 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
         if (thePuzzle[piece].y !== 0 && !thePuzzle[piece].connected.includes(piece - xCount)) {
             const offset = piece-xCount < xCount ? buffer : 0
             if (Math.abs(thePuzzle[piece].yLoc - (thePuzzle[piece-xCount].yLoc + pieceSize - offset)) < SNAP_GAP
-                && Math.abs(thePuzzle[piece].xLoc - (thePuzzle[piece-xCount].xLoc)) < SNAP_GAP) {
+                && Math.abs(thePuzzle[piece].xLoc - thePuzzle[piece-xCount].xLoc) < SNAP_GAP) {
                 outputX = thePuzzle[piece-xCount].xLoc
                 outputY = thePuzzle[piece-xCount].yLoc + pieceSize - offset
                 return [ outputX, outputY, piece - xCount ]
@@ -102,19 +100,24 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
             }
         }
 
-        return [ outputX, outputY ]
+        return [ outputX, outputY, null ]
     }
 
     function setActive(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
+
             if (temp[currentActive].connected.length <= 1) {
                 temp[currentActive].z = 0
             }
+
+            console.log(temp[currentActive].connected)
+
             temp[currentActive].connected.forEach(piece => {
                 let [newX, newY, otherPiece] = checkConnection(piece)
                 
                 if(otherPiece) {
+                    const snap = new Audio('/snap.mp3')
                     snap.play()
                     bindPieces(piece, otherPiece)
                 }
@@ -123,6 +126,7 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
                 temp[piece].xLoc = newX
                 temp[piece].yLoc = newY
             })
+            
             setThePuzzle(temp)
             setCurrentActive(null)
             if (temp[currentActive].connected.length === thePuzzle.length) {
@@ -138,11 +142,9 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
     function movePiece(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
-            temp[currentActive].xLoc = updatePieceXLocation(e.clientX, currentActive)
-            temp[currentActive].yLoc = updatePieceYLocation(e.clientY, currentActive)
             for (let connection of temp[currentActive].connected) {
-                temp[connection].xLoc = updatePieceXLocation(e.clientX, connection)
-                temp[connection].yLoc = updatePieceYLocation(e.clientY, connection)
+                temp[connection].xLoc = updatePieceLocation(e.clientX, 'x', connection)
+                temp[connection].yLoc = updatePieceLocation(e.clientY, 'y', connection)
                 temp[connection].z = 3
             }
             setThePuzzle(temp)
@@ -150,14 +152,9 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
         }
     }
 
-    function updatePieceXLocation(mouseX, piece) {
-        const offset = thePuzzle[piece].x === 0 ? buffer : 0
-        return (thePuzzle[piece].x - thePuzzle[currentActive].x) * pieceSize + mouseX - pieceSize / 2 + offset
-    }
-
-    function updatePieceYLocation(mouseY, piece) {
-        const offset = thePuzzle[piece].y === 0 ? buffer : 0
-        return (thePuzzle[piece].y - thePuzzle[currentActive].y) * pieceSize + mouseY - pieceSize / 2 + offset
+    function updatePieceLocation(pointer, dimension, piece) {
+        const offset = thePuzzle[piece][dimension] === 0 ? buffer : 0
+        return (thePuzzle[piece][dimension] - thePuzzle[currentActive][dimension]) * pieceSize + pointer - pieceSize / 2 + offset
     }
     
     async function setupPuzzle () {
@@ -229,26 +226,26 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
     return (
         <div id="puzzle-container" onMouseMove={movePiece} >
             {
-                thePuzzle.map((piece, index) => {
+                thePuzzle.map(piece => {
                     return (
                         <>
                             {
                                 type === 'tile' ?
                                     <TilePiece 
                                         setActive={setActive}
-                                        key={index}
+                                        key={piece.x + (piece.y * xCount)}
                                         piece={piece}
                                         image={puzzleImage.photoUrl}
-                                        id={index}
+                                        id={piece.x + (piece.y * xCount)}
                                         size={pieceSize}
                                     />
                                 :
                                     <PolyPiece 
                                         setActive={setActive}
-                                        key={index}
+                                        key={piece.x + (piece.y * xCount)}
                                         piece={piece}
                                         image={puzzleImage.photoUrl}
-                                        id={index}
+                                        id={piece.x + (piece.y * xCount)}
                                         size={pieceSize}
                                         vEdges={vEdges}
                                         hEdges={hEdges}
