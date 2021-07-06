@@ -1,50 +1,51 @@
-@import '../../scss/_colors.scss';
-@import '../../scss/_fonts.scss';
+@import "../../scss/_colors.scss";
+@import "../../scss/_fonts.scss";
 
 #header-container {
-    width: 100%;
-    height: 150px;
-    box-shadow: 0 0 4px black, inset 0 0 2px black;
-    background: linear-gradient(black, $primary-color);
-    position: relative;
-    pointer-events: none;
+  width: 100%;
+  height: 150px;
+  box-shadow: 0 0 4px black, inset 0 0 2px black;
+  background: linear-gradient(black, $primary-color);
+  position: relative;
 }
 
 #header-title {
-    position: absolute;
-    left: 50%;
-    top: 35%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    font-weight: 600;
-    font-family: $header-font;
-    white-space: nowrap;
-    color: whitesmoke;
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  font-weight: 600;
+  font-family: $header-font;
+  white-space: nowrap;
+  color: whitesmoke;
+  cursor: pointer;
 }
 
 #header-slogan {
-    position: absolute;
-    font-size: 25px;
-    color: white;
-    left: 50%;
-    top: 67%;
-    white-space: nowrap;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  font-size: 25px;
+  color: white;
+  left: 50%;
+  top: 67%;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 @media screen and (min-width: 650px) {
-    #header-contianer {
-        height: 100px;
-    }
+  #header-contianer {
+    height: 100px;
+  }
 
-    #header-title {
-        left: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+  #header-title {
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-    #header-slogan {
-        top: 55%;
-        left: 500px;
-    }
+  #header-slogan {
+    top: 55%;
+    left: 500px;
+  }
 }

@@ -1,43 +1,52 @@
-@import '../../scss/colors';
+@import "../../scss/colors";
 
 #home-container {
-    width: 100vw;
-    min-height: 100vh;
-    background-color: $bg-primary-color;
-    background: radial-gradient(ellipse at top, $bg-primary-color, rgba(0, 0, 0, 0.799));
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $bg-primary-color;
+  background: radial-gradient(
+    ellipse at top,
+    $bg-primary-color,
+    rgba(0, 0, 0, 0.799)
+  );
 }
 
 .pagination-display {
-    font-size: 1.5em;
-    margin: 40px;
-    position: relative;
+  font-size: 1.5em;
+  margin: 40px;
+  position: relative;
+
+  span {
+    pointer-events: none;
+  }
 }
 
 .left-arrow {
-    width: 20px;
-    height: 100%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-80px);
-    background-color: $primary-color;
-    clip-path: polygon(0 50%, 80% 100%, 80% 0);
-    color: rgba(0, 0, 0, 0);
-    cursor: pointer;  
+  width: 20px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-80px);
+  background-color: $primary-color;
+  clip-path: polygon(0 50%, 80% 100%, 80% 0);
+  color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
-.left-arrow:hover, .right-arrow:hover {
-    background-color: $active-color;
+.left-arrow:hover,
+.right-arrow:hover {
+  background-color: $active-color;
 }
 
 .right-arrow {
-    width: 20px;
-    height: 100%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(60px);
-    background-color: $primary-color;
-    clip-path: polygon(20% 0, 20% 100%, 100% 50%);
-    color: rgba(0, 0, 0, 0);
-    cursor: pointer;
-    display: inline;
+  width: 20px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(60px);
+  background-color: $primary-color;
+  clip-path: polygon(20% 0, 20% 100%, 100% 50%);
+  color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  display: inline;
 }

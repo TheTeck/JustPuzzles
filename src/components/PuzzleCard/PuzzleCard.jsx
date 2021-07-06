@@ -19,7 +19,7 @@ export default function PuzzleCard ({ puzzle, showPuzzle, index, firstPage }) {
                 {months[puzzle.month-1]} {puzzle.day}, {puzzle.year}
             </div>
             <div className="thumb-container">
-                <img className="puzzle-thumb" src={puzzle.photoUrl} style={{ width: `${puzzle.width/3}px`, height: `${puzzle.height/3}px`, background: 'rgba(0,0,0,0.5)' }} />
+                <img className="puzzle-thumb" onClick={handlePlayClick} src={puzzle.photoUrl} style={{ width: `${puzzle.width/3}px`, height: `${puzzle.height/3}px`, background: 'rgba(0,0,0,0.5)' }} />
             </div>
             <div className="play-btn" onClick={handlePlayClick}>Play This Puzzle</div>
         </div>

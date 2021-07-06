@@ -59,7 +59,7 @@ export default function HomePage ({ pageNum }) {
             <Header />
             <div className="pagination-display">
                 <div onClick={handleLeftClick} className="left-arrow"></div>
-                {page} of {totalPages} Pages
+                <span>{page} of {totalPages} Pages</span>
                 <div onClick={handleRightClick} className="right-arrow"></div>
             </div>
             <Feed puzzles={pagePuzzles} showPuzzle={showPuzzle} firstPage={page === 1 ? true : false}/>

@@ -1,74 +1,81 @@
-@import '../../scss/colors';
+@import "../../scss/colors";
 
 .card-container {
-    text-align: center;
-    margin: 70px 0;
-    position: relative;
+  text-align: center;
+  margin: 70px 0;
+  position: relative;
 }
 
 .puzzle-date {
-    font-size: 2em;
-    font-weight: 600;
-    margin: 15px;
-    position: relative;
+  font-size: 2em;
+  font-weight: 600;
+  margin: 15px;
+  position: relative;
+  pointer-events: none;
 }
 
 #new-puzzle {
-    color: $active-color;
-    position: absolute;
-    white-space: nowrap;
-    font-size: 0.5em;
-    top: -2em;
-    left: 50%;
-    transform: translateX(-50%);
+  color: $active-color;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 0.5em;
+  top: -2em;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .puzzle-thumb {
-    box-shadow: 0 5px 10px black;
+  box-shadow: 0 5px 10px black;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+
+  &:hover {
+    box-shadow: 0 10px 20px black;
+  }
 }
 
 .play-btn {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: white;
-    border: 2px solid rgba(255, 0, 0, 0);
-    border-radius: 5px;
-    background-color: $primary-color;
-    margin: 10px;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 180ms ease-in;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: white;
+  border: 2px solid rgba(255, 0, 0, 0);
+  border-radius: 5px;
+  background-color: $primary-color;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 180ms ease-in;
 
-    &:hover {
-        background: whitesmoke;
-        border: 2px solid $primary-color;
-        color: $primary-color;
-    }
+  &:hover {
+    background: whitesmoke;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+  }
 }
 
 @media screen and (min-width: 1000px) {
-    .card-container {
-        margin: 30px 0;
-    }
+  .card-container {
+    margin: 30px 0;
+  }
 
-    .thumb-container {
-        width: 50%;
-        text-align: right;
-        padding-right: 30px;
-    }
+  .thumb-container {
+    width: 50%;
+    text-align: right;
+    padding-right: 30px;
+  }
 
-    .puzzle-date {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(0, -200%);
-    }
+  .puzzle-date {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(0, -200%);
+  }
 
-    .play-btn {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 30%;
-        max-width: 300px;
-    }
+  .play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30%;
+    max-width: 300px;
+  }
 }
