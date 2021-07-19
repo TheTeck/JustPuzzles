@@ -103,6 +103,8 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
         return [ outputX, outputY, null ]
     }
 
+    // Either selects a piece or checks and makes any connections if
+    // already selected peice is within range of connectable pieces
     function setActive(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
@@ -111,11 +113,10 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
                 temp[currentActive].z = 0
             }
 
-            console.log(temp[currentActive].connected)
-
             temp[currentActive].connected.forEach(piece => {
                 let [newX, newY, otherPiece] = checkConnection(piece)
                 
+                // If there is a connectable piece in range
                 if(otherPiece) {
                     const snap = new Audio('/snap.mp3')
                     snap.play()
@@ -131,7 +132,6 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
             setCurrentActive(null)
             if (temp[currentActive].connected.length === thePuzzle.length) {
                 handlePuzzleComplete()
-                console.log("puzzle is complete")
             }
         } else {
             if (e.target.id >= 0 && e.target.id < yCount * xCount)
@@ -139,6 +139,7 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
         }
     }
 
+    // Move all connected pieced attached to the one piece selected
     function movePiece(e) {
         if (currentActive !== null) {
             const temp = thePuzzle
@@ -157,6 +158,7 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
         return (thePuzzle[piece][dimension] - thePuzzle[currentActive][dimension]) * pieceSize + pointer - pieceSize / 2 + offset
     }
     
+    // Initial creation of all puzzle pieces
     async function setupPuzzle () {
         try {
             const puzzleImg = await puzzleService.getOne(id)
@@ -169,9 +171,12 @@ export default function Puzzle ({ id, type, pieceSize, handlePuzzleComplete }) {
             const temp = []
             const vEdgeBuilder = []
             const hEdgeBuilder = []
+
             for(let y = 0; y < ySize; y++) {         
                 vEdgeBuilder.push([])
                 hEdgeBuilder.push([]) 
+
+                // Create all of the pieces
                 for (let x = 0; x < xSize; x++) {
 
                     let description = ''
